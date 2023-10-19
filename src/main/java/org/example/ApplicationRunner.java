@@ -1,21 +1,27 @@
 package org.example;
 
+import org.example.repository.HouseHoldIncomeInMemoryRepositoryImpl;
+
 import java.text.MessageFormat;
-import org.example.repository.GradeInMemoryRepositoryImpl;
-import org.example.service.AcademicRecordService;
-import org.example.service.AcademicRecordServiceImpl;
+
+import static java.text.MessageFormat.*;
 
 public class ApplicationRunner {
   public static void main(String[] args) {
 
-    AcademicRecordService academicRecordService =
-        new AcademicRecordServiceImpl(new GradeInMemoryRepositoryImpl());
+    org.example.service.HouseHoldIncomeService householdIncomeService =
+            (org.example.service.HouseHoldIncomeService) new HouseHoldIncomeServiceImpl(new HouseHoldIncomeInMemoryRepositoryImpl());
 
     System.out.println(
-        MessageFormat.format(
-            "Suma de número calificaciones: {0}", academicRecordService.sumNumberOfGrades()));
+            format("Comidas: {0}", HouseHoldIncomeService.calculateAverageHouseHoldIncome()));
+
 
     System.out.println(
-        MessageFormat.format("Promedio: {0}", academicRecordService.calculateAverage()));
+        format(
+            "Cantidad de familias: {0}", HouseHoldIncomeService.sumNumberOfFamilies()));
+
+    System.out.println(
+        format("Promedio: {0}", HouseHoldIncomeService.calculateAverageHouseHoldIncome()));
   }
+
 }
